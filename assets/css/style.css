@@ -1,0 +1,72 @@
+body {
+	font-family: Tahoma, Arial, sans-serif;
+	padding: 0 30px;
+}
+
+h2 {
+	margin: .5rem 0;
+}
+
+#choose-character::after, #enemies::after, #ring::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.character {
+	width: 150px;
+	height: 150px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	float: left;
+	margin-right: 15px;
+	cursor: pointer;
+	position: relative;
+}
+
+.character h3 {
+	font-size: 1rem;
+}
+
+.character h3, .character p {
+	position: absolute;
+	display: block;
+	bottom: 15px;
+	left: 6px;
+	color: #fafafa;
+	text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+}
+
+.character p {
+	bottom: 0px;
+	font-size: .9rem;
+}
+
+.you {
+	border: 3px solid green;
+}
+
+.enemies {
+	border: 3px solid red;
+}
+
+*[data-name = 'regina'] {
+	background-image: url('../../assets/images/regina.jpg');
+}
+
+*[data-name = 'sharpay'] {
+	background-image: url('../../assets/images/sharpay.jpg');
+}
+
+*[data-name = 'taylor']{
+	background-image: url('../../assets/images/taylor.jpg');
+}
+
+*[data-name = 'kathryn'] {
+	background-image: url('../../assets/images/kathryn.jpg');
+}
+
+button {
+	margin: 15px;
+}
