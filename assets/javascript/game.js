@@ -38,6 +38,7 @@ var game = {
 				$(this).siblings('.character').appendTo('#enemies').addClass('enemies');
 				self.stage = "choose opponent";
 				console.log(self.stage);
+				//suggestion from Brian 
 			}
 			self.chooseOpponent();
 		});
@@ -57,42 +58,46 @@ var game = {
 		$('.opponent').hide().removeClass('opponent');
 			if ($('.enemies').is(':visible')){
 				alert ("Battle Won. Choose Another Opponent");
+				this.newRound();
 			} else {
 				alert("You're the Mean Queen. Game Over");
+				$('.reset').show();
 			}
 		 	
-		 	this.newRound();
+		 	
 	},
 	loseBattle : function(){
 		alert("You're no match for these top mean girls. Game Over");
-		this.reset();
+		$('.reset').show();
 	},
 	newRound : function(){
 		this.stage = "choose opponent";
 		$('.report').html("");
 	},
 	reset : function(){
-		var self = this;
-		$(".reset").show();
-		$(document).on('click', '.reset', function(){
-			$(this).hide();
-			self.clickCounter = 0;
-			self.stage = "choose character";
-			$('.character').show().appendTo('#choose-character').removeClass('enemies you opponent');
-			console.log(self.stage);
-			self.regina.healthPoints = 150;
-			self.kathryn.healthPoints = 200;
-			self.taylor.healthPoints = 175;
-			self.sharpay.healthPoints = 140;
-			
-		});
-		self.chooseCharacter();
+		this.chooseCharacter();
 		$('.report').html("");
+		this.clickCounter = 0;
+		this.stage = "choose character";
+		$('.character').show().appendTo('#choose-character').removeClass('enemies you opponent');
+		console.log(this.stage);
+		this.regina.healthPoints = 150;
+		this.kathryn.healthPoints = 200;
+		this.taylor.healthPoints = 175;
+		this.sharpay.healthPoints = 140;
+
+		$("*[data-name = 'regina']").find('.health').html(this.regina.healthPoints);
+		$("*[data-name = 'kathryn']").find('.health').html(this.kathryn.healthPoints);
+		$("*[data-name = 'taylor']").find('.health').html(this.taylor.healthPoints);
+		$("*[data-name = 'sharpay']").find('.health').html(this.sharpay.healthPoints);
 	}
-}
+}	
+	game.reset();
 
-
-	game.chooseCharacter();
+	$(document).on('click', '.reset', function(){
+			$(this).hide();
+			game.reset();
+		});
 
 	$('.attack').on('click', function(){
 		var characterName = $('.you').attr('data-name');
@@ -113,7 +118,7 @@ var game = {
 		$('.opponent').find('.health').html(game[opponentName]['healthPoints']); 
 
 		//update game status report
-		$('.report').html("You attacked " + game[characterName]['fullName'] + " for " + game[characterName]['attackPower'] + " damage.<br/>" + game[opponentName]['fullName'] + " attacked you back for " + game[opponentName]['counterAttackPower']+ " damage.")
+		$('.report').html("You attacked " + game[opponentName]['fullName'] + " for " + game[characterName]['attackPower'] + " damage.<br/>" + game[opponentName]['fullName'] + " attacked you back for " + game[opponentName]['counterAttackPower']+ " damage.")
 
 		 if(game[opponentName]['healthPoints'] <= 0){
 		 	game.winBattle();
