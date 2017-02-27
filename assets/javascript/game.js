@@ -33,7 +33,6 @@ var game = {
 				$(this).siblings('.character').appendTo('#enemies').addClass('enemies');
 				outerScope.stage = "choose opponent";
 				window.selectedCharacter = $(this).attr('data-name');
-				console.log(selectedCharacter);
 			}
 			outerScope.chooseOpponent();
 		});
@@ -46,7 +45,6 @@ var game = {
 				$(this).appendTo('#ring').addClass('opponent');
 				outerScope.stage = "fight";
 				window.selectedOpponent = $(this).attr('data-name');
-				console.log(selectedOpponent);
 			}
 		});
 	}, 
